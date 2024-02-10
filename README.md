@@ -13,3 +13,8 @@ Singletons restricts the instantiation of a class to a singular instance. If you
 3. In the `Desktop` project, under the `MauiProgram.cs` file, add the following code `builder.Services.AddSingleton<{YOUR FILE NAME HERE}>();`.
 4. Use `@Inject {YOUR FILE NAME HERE} {VARIABLENAME}` at the top of any your pages to utilize your singleton.
 
+## Shared WWWRoot Directory
+Instead of copying your WWWRoot directory accross all three projects, just put all your central files in the `Base` project, but for CSS and JS you still need to reference them in the `App.razor` file like this:
+> `<link rel="stylesheet" href="_content/Base/{PATH TO YOUR FILE HERE}" />`
+And in the `Desktop` project in the	`index.html` file like so:
+> `<link rel="stylesheet" href="_content/Base/{PATH TO YOUR FILE HERE}" />`
