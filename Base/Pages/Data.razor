@@ -1,0 +1,24 @@
+﻿@page "/data"
+@inject Names nameLists
+
+<PageTitle>Data</PageTitle>
+
+<h3>Data</h3>
+
+<p>Hello @(nameLists.Name)</p>
+
+<div>
+    <h5>Singleton Data Lists</h5>
+    <ol>
+        @foreach(string company in nameLists.Companies)
+        {
+            <li>@company</li>
+        }
+    </ol>
+</div>
+
+
+
+@code {
+
+}

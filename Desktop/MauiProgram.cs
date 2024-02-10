@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Base.Singletons;
+using Microsoft.Extensions.Logging;
 
 namespace Desktop
 {
@@ -15,9 +16,11 @@ namespace Desktop
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            //Singgleton Declaration
+            builder.Services.AddSingleton<Names>();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif
 

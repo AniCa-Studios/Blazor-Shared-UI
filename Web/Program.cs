@@ -1,4 +1,5 @@
 using Web.Components;
+using Base.Singletons;
 
 namespace Web
 {
@@ -11,6 +12,8 @@ namespace Web
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
+            //Singgleton Declaration
+            builder.Services.AddSingleton<Names>();
 
             var app = builder.Build();
 

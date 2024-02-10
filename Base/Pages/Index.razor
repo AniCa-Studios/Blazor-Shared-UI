@@ -1,4 +1,6 @@
 ﻿@page "/"
+@inject NavigationManager Nav
+@inject Names nameLists
 
 <PageTitle>Home</PageTitle>
 
@@ -6,15 +8,17 @@
 
 Welcome to your new app.
 
+<input @bind-value="nameLists.Name" placeholder="Enter Your Name" />
+
 <p role="status">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+<a href="/data">Data Page</a>
+
 
 @code {
     private int currentCount = 0;
-
-
 
     private void IncrementCount()
     {
