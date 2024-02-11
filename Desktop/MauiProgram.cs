@@ -1,4 +1,8 @@
-﻿using Base.Singletons;
+﻿using Base.IRepositories;
+using Base.IServices;
+using Base.Repositories;
+using Base.Services;
+using Base.Singletons;
 using Microsoft.Extensions.Logging;
 
 namespace Desktop
@@ -18,6 +22,9 @@ namespace Desktop
             builder.Services.AddMauiBlazorWebView();
             //Singgleton Declaration
             builder.Services.AddSingleton<Names>();
+            //Scoped Declaration
+            builder.Services.AddScoped<IDatabase, Database>();
+            builder.Services.AddScoped<IService, Service>();
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();

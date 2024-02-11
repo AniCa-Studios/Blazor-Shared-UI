@@ -1,0 +1,94 @@
+﻿@page "/sql"
+@inject IService service
+
+<PageTitle>SQL</PageTitle>
+
+<div class="container">
+    <NavBar></NavBar>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="input-group mt-3">
+                    <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                    <select class="form-select" id="inputGroupSelect01" value="@SQLType" @onchange="ChangeSQL">
+                        <option value="mssql">Microsoft SQL</option>
+                        <option value="mysql">MySQL</option>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <img src="_content/Base/img/@(SQLType).png" alt="@(SQLType)" style="width:100px; height: auto; margin-top: 4px;" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="input-group mb-3 mt-3">
+                    <span class="input-group-text">Server</span>
+                    <input type="text" class="form-control" @bind-value="Server" placeholder="Server Name">
+                    <span class="input-group-text">Database</span>
+                    <input type="text" class="form-control" @bind-value="Database" placeholder="Database Name">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Username</span>
+                    <input type="text" class="form-control" @bind-value="Username" placeholder="Username">
+                    <span class="input-group-text">Password</span>
+                    <input type="password" class="form-control" @bind-value="Password" placeholder="Password">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Table</span>
+                    <input type="text" class="form-control" @bind-value="Table" placeholder="Table Name">
+                    <span class="input-group-text">Column</span>
+                    <input type="text" class="form-control" @bind-value="Column" placeholder="Column Name">
+                </div>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-primary mt-3" style="height:calc(100% - 16px);" @onclick="Query">Query</button>
+            </div>
+        </div>
+    </div>
+    @if (results != null)
+    {
+        <div class="container-fluid">
+            <h3>SQL Data</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">@Column</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (string result in results)
+                    {
+                        <tr>
+                            <th scope="row">@result</th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+</div>
+@code {
+    private string SQLType { get; set; } = "mysql";
+    private string Server { get; set; } = "";
+    private string Database { get; set; } = "";
+    private string Username { get; set; } = "";
+    private string Password { get; set; } = "";
+    private string Table { get; set; } = "";
+    private string Column { get; set; } = "";
+    private List<string> results;
+
+    void ChangeSQL(ChangeEventArgs e)
+    {
+        if (e.Value != null)
+        {
+            SQLType = e.Value.ToString();
+            StateHasChanged();
+        }
+    }
+
+    async void Query()
+    {
+        results = await service.FetchSQL(SQLType, Server, Database, Username, Password, Table, Column);
+        StateHasChanged();
+    }
+}

@@ -1,27 +1,11 @@
 ﻿@page "/data"
 @inject Names nameLists
+@inject IService service
 
 <PageTitle>Data</PageTitle>
 
 <div class="container">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#/">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/data">Data</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <NavBar></NavBar>
     <div class="row">
         <div class="col-md-3">
             <h1>Data</h1>
@@ -36,7 +20,25 @@
                 }
             </ol>
         </div>
-
+    </div>
+    <div class="row">
+        <h2>Temperature</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Yesterday</th>
+                    <th scope="col">Today</th>
+                    <th scope="col">Tomorrow</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@(service.FetchTemperature(DateTime.Now.AddDays(-1)))</td>
+                    <td>@(service.FetchTemperature(DateTime.Now))</td>
+                    <td>@(service.FetchTemperature(DateTime.Now.AddDays(1)))</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

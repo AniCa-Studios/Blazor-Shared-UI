@@ -1,5 +1,9 @@
 using Web.Components;
 using Base.Singletons;
+using Base.IServices;
+using Base.Services;
+using Base.IRepositories;
+using Base.Repositories;
 
 namespace Web
 {
@@ -14,6 +18,9 @@ namespace Web
                 .AddInteractiveServerComponents();
             //Singgleton Declaration
             builder.Services.AddSingleton<Names>();
+            //Scoped Declaration
+            builder.Services.AddScoped<IDatabase, Database>();
+            builder.Services.AddScoped<IService, Service>();
 
             var app = builder.Build();
 
