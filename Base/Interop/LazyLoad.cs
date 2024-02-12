@@ -35,24 +35,24 @@ namespace Base.Interop
         {
             try
             {
-                string path = Directory.GetCurrentDirectory();
-                if (!File.Exists($"{path}/{package}.dll"))
+                string location = Assembly.GetExecutingAssembly().Location;
+                string path = Path.GetDirectoryName(location);
+                if (File.Exists($"{path}/{package}.dll"))
                 {
-                    path = $"{path}/bin/Debug/net8.0";
+                    Stream stream = File.OpenRead($"{path}/{package}.dll");
+                    Assembly assembly = AssemblyLoadContext.Default.LoadFromStream(stream);
+                    Type? componentType = assembly.GetType(package + "." + component);
+                    if (componentType != null)
+                    {
+                        await AddLink(package, $"/{package}/{package}.styles.css");
+                    }
+                    return componentType;
                 }
-                Stream stream = File.OpenRead($"{path}/{package}.dll");
-                Assembly assembly = AssemblyLoadContext.Default.LoadFromStream(stream);
-                Type? componentType = assembly.GetType(package + "." + component);
-                if (componentType != null)
-                {
-                    await AddLink(package, $"/{package}/{package}.styles.css");
-                }
-                return componentType;
             }catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return null;
+                Console.WriteLine(ex.Message);  
             }
+            return null;
         }
     }
 }
