@@ -37,6 +37,9 @@ You can install as needed nuget packages to `Base` and they will carry over to t
 ### Blazored Resources
 Blazored Modal and Toast are included in the project to showcase how to effectively add them and utilize them across the projects. In `Base` modals folders is where you can store all your custom modals.
 
+## Lazy Loading RCL
+A crazy addition is the ability to lazy load or load at runtime Razor components. This allows you to create custom components and load when and where you need them. You can just call the component or pass parameters. Refer to the Lazy page to see how to implement this.
+
 ## Included Addons Libraries
 #### CSS
 - Bootstrap

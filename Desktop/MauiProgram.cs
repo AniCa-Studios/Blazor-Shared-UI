@@ -1,4 +1,5 @@
-﻿using Base.IRepositories;
+﻿using Base.Interop;
+using Base.IRepositories;
 using Base.IServices;
 using Base.Repositories;
 using Base.Services;
@@ -25,6 +26,7 @@ namespace Desktop
             //Singgleton Declaration
             builder.Services.AddSingleton<Names>();
             //Scoped Declaration
+            builder.Services.AddScoped<LazyLoad>();
             builder.Services.AddScoped<IDatabase, Database>();
             builder.Services.AddScoped<IService, Service>();
             //Extras

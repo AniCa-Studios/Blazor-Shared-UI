@@ -1,0 +1,8 @@
+﻿<div class="my-component">
+    This component is defined in the <strong>Custom</strong> library. Hello @Title!
+</div>
+
+@code{
+    [Parameter]
+    public string Title { get; set; } = "Set By Child";
+}

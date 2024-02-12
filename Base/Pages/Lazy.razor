@@ -1,0 +1,28 @@
+﻿@page "/lazy"
+@inject LazyLoad Load
+
+<PageTitle>Lazy Load</PageTitle>
+
+
+<div class="container">
+    <NavBar></NavBar>
+    <div>
+        @if (componentType != null)
+        {
+            <DynamicComponent Type="@componentType" Parameters="componentParams"/>
+        }
+    </div>
+</div>
+
+
+
+@code {
+    private Type? componentType;
+    private Dictionary<string,object> componentParams = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        componentType = await Load.LoadComponent("Custom", "Components.Test");
+        componentParams.Add("Title", "Julian");
+    }
+}

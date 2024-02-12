@@ -6,6 +6,7 @@ using Base.IRepositories;
 using Base.Repositories;
 using Blazored.Toast;
 using Blazored.Modal;
+using Base.Interop;
 
 namespace Web
 {
@@ -21,6 +22,7 @@ namespace Web
             //Singgleton Declaration
             builder.Services.AddSingleton<Names>();
             //Scoped Declaration
+            builder.Services.AddScoped<LazyLoad>();
             builder.Services.AddScoped<IDatabase, Database>();
             builder.Services.AddScoped<IService, Service>();
             //Extras
