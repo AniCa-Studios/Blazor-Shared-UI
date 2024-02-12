@@ -1,0 +1,30 @@
+﻿@page "/blazored-demo"
+@inject IToastService toastService
+
+<PageTitle>Blazored Demo</PageTitle>
+
+<div class="container">
+    <NavBar></NavBar>
+    <div class="container-fluid">
+        <h3>Toast Demo</h3>
+
+        To show a toast just click one of the buttons below.
+
+        <button class="btn btn-primary" @onclick="ShowModal">Modal</button>
+        <button class="btn btn-info" @onclick="@(() => toastService.ShowInfo("I'm an INFO message"))">Info Toast</button>
+        <button class="btn btn-success" @onclick="@(() => toastService.ShowSuccess("I'm a SUCCESS message with a custom title"))">Success Toast</button>
+        <button class="btn btn-warning" @onclick="@(() => toastService.ShowWarning("I'm a WARNING message"))">Warning Toast</button>
+        <button class="btn btn-danger" @onclick="@(() => toastService.ShowError("I'm an ERROR message"))">Error Toast</button>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter] IModalService Modal { get; set; } = default!;
+
+    void ShowModal()
+    {
+        var parameters = new ModalParameters().Add(nameof(Alert.Message), "Hello, World!");
+
+        Modal.Show<Alert>("Passing Data", parameters);
+    }
+}

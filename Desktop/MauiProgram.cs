@@ -3,6 +3,8 @@ using Base.IServices;
 using Base.Repositories;
 using Base.Services;
 using Base.Singletons;
+using Blazored.Modal;
+using Blazored.Toast;
 using Microsoft.Extensions.Logging;
 
 namespace Desktop
@@ -25,6 +27,9 @@ namespace Desktop
             //Scoped Declaration
             builder.Services.AddScoped<IDatabase, Database>();
             builder.Services.AddScoped<IService, Service>();
+            //Extras
+            builder.Services.AddBlazoredModal();
+            builder.Services.AddBlazoredToast();
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();

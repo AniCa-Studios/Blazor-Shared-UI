@@ -4,6 +4,8 @@ using Base.IServices;
 using Base.Services;
 using Base.IRepositories;
 using Base.Repositories;
+using Blazored.Toast;
+using Blazored.Modal;
 
 namespace Web
 {
@@ -21,6 +23,9 @@ namespace Web
             //Scoped Declaration
             builder.Services.AddScoped<IDatabase, Database>();
             builder.Services.AddScoped<IService, Service>();
+            //Extras
+            builder.Services.AddBlazoredModal();
+            builder.Services.AddBlazoredToast();
 
             var app = builder.Build();
 

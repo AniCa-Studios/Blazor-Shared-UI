@@ -34,11 +34,17 @@ And in the `Desktop` project in the	`index.html` file like so:
 ## Nuget Packages
 You can install as needed nuget packages to `Base` and they will carry over to the other projects. They will need to be installed per project if you plan to write code using them in the other two, but you can excute what you need to from `Base`.
 
+### Blazored Resources
+Blazored Modal and Toast are included in the project to showcase how to effectively add them and utilize them across the projects. In `Base` modals folders is where you can store all your custom modals.
+
 ## Included Addons Libraries
 #### CSS
 - Bootstrap
+- Font Awesome
 
 #### Nuget
+- Blazored Modal
+- Blazored Toast
 - Dapper
 - MySqlConnector
 - System.Data.SqlClient
