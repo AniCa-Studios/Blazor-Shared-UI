@@ -36,7 +36,7 @@ namespace Base.Interop
             try
             {
                 string location = Assembly.GetExecutingAssembly().Location;
-                string path = Path.GetDirectoryName(location);
+                string? path = Path.GetDirectoryName(location);
                 if (File.Exists($"{path}/{package}.dll"))
                 {
                     Stream stream = File.OpenRead($"{path}/{package}.dll");
